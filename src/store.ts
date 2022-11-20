@@ -1,6 +1,6 @@
 import create from "zustand";
 import Pillar from "./Pillar";
-import { sector01Data, sector02Data, sector03Data } from "./Pillar/fixedData";
+import { sector01Data, sector02Data, sector03Data } from "./Pillar/fixed";
 
 // Initial State Data
 
@@ -8,8 +8,8 @@ const initialHeight = 0;
 const initialWidth = 0;
 
 const sector01Pillars = sector01Data.map((data) => new Pillar(data));
-const sector02Pillars = sector03Data.map((data) => new Pillar(data)); // Oopsie
-const sector03Pillars = sector02Data.map((data) => new Pillar(data)); // Whoopsie
+const sector02Pillars = sector02Data.map((data) => new Pillar(data));
+const sector03Pillars = sector03Data.map((data) => new Pillar(data));
 
 // Zustand Store
 

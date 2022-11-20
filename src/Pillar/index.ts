@@ -1,8 +1,8 @@
-import { PillarData } from "./PillarDataType";
+import { PillarData } from "./fixed";
 
-import { sector01Coordinates } from "./sector01/fixed";
-import { sector03Coordinates } from "./sector03/fixed";
-import { sector02Coordinates } from "./sector02/fixed";
+import { sector01Coordinates } from "./fixed";
+import { sector02Coordinates } from "./fixed";
+import { sector03Coordinates } from "./fixed";
 
 type Point = { x: number; y: number };
 type Dimension = { height: number; width: number };
