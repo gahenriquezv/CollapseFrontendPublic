@@ -22,7 +22,7 @@ interface State {
   sector02Pillars: Pillar[];
   sector03Pillars: Pillar[];
   selectedPillar: Pillar | null;
-  setSelectedPillar: (newPillar: Pillar) => void;
+  setSelectedPillar: (newPillar: Pillar | null) => void;
 }
 
 const useStore = create<State>((set) => ({

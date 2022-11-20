@@ -13,10 +13,17 @@ interface RhomboidProps {
   onClick?: (evt: KonvaEventObject<MouseEvent>) => void;
 }
 
-function Rhomboid(props: RhomboidProps) {
-  const angle = props.angle || Math.PI / 3;
-
-  const { x, y, height, width } = props;
+function Rhomboid({
+  x,
+  y,
+  height,
+  width,
+  color,
+  draggable,
+  onClick,
+  angle,
+}: RhomboidProps) {
+  angle = angle || Math.PI / 3;
 
   const points = [
     -height / Math.tan(angle),
@@ -36,10 +43,10 @@ function Rhomboid(props: RhomboidProps) {
         y={y}
         points={points}
         closed={true}
-        fill={props.color}
+        fill={color}
         stroke="black"
-        draggable={props.draggable}
-        onClick={props.onClick}
+        draggable={draggable}
+        onClick={onClick}
         onMouseEnter={(e) => {
           const container = e.target.getStage()?.container();
           if (container) container.style.cursor = "pointer";

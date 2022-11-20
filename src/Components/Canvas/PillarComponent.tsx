@@ -1,5 +1,3 @@
-import shallow from "zustand/shallow";
-
 import Pillar from "../../Pillar";
 import useStore from "../../store";
 import Rhomboid from "./Rhomboid";
@@ -15,12 +13,7 @@ function PillarComponent({
   stageHeight,
   stageWidth,
 }: PillarComponentProps) {
-  const { setSelectedPillar } = useStore(
-    (state) => ({
-      setSelectedPillar: state.setSelectedPillar,
-    }),
-    shallow
-  );
+  const setSelectedPillar = useStore((state) => state.setSelectedPillar);
 
   const { x, y, height, width, angle, color } = pillar.getJsxData();
   const xPos = x * stageWidth;

@@ -1,17 +1,19 @@
-import Pillar from "../Pillar";
+import useStore from "../store";
 import WaterfallChart from "./WaterfallChart";
 
-interface SelectedPillarProps {
-  pillar: Pillar;
-}
+function PillarDetails() {
+  const selectedPillar = useStore((state) => state.selectedPillar);
 
-function PillarDetails({ pillar }: SelectedPillarProps) {
+  if (selectedPillar === null) {
+    return null;
+  }
+
   return (
     <>
       <p className="lead">{`Probabilidad del ${(
-        pillar.data.chance * 100
+        selectedPillar.data.chance * 100
       ).toPrecision(3)}% de colapso`}</p>
-      <WaterfallChart instance={pillar} />
+      <WaterfallChart instance={selectedPillar} />
     </>
   );
 }

@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 
-import Sector01 from "./Macroblocks/Sector01";
-import Sector02 from "./Macroblocks/Sector02";
-import Sector03 from "./Macroblocks/Sector03";
-import MainPage from "./MainPage";
+import MainPage from "../pages/MainPage";
+import Sector01 from "../pages/Sector01";
+import Sector02 from "../pages/Sector02";
+import Sector03 from "../pages/Sector03";
 import Navbar from "./Navbar";
 
 function App() {
