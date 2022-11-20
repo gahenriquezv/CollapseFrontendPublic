@@ -6,28 +6,28 @@ interface BackgroundImageProps {
   width: number;
 }
 
-export default function BackgroundImage(props: BackgroundImageProps) {
+export default function BackgroundImage({ url, width }: BackgroundImageProps) {
   const [image, setImage] = useState<HTMLImageElement | null>(null);
 
-  const loadImage = () => {
+  function loadImage() {
     const img = new window.Image();
-    img.src = props.url;
+    img.src = url;
 
-    const handleImage = () => {
-      const ratio = (props.width - 5) / img.width;
+    function handleImage() {
+      const ratio = (width - 5) / img.width;
       img.width = Math.floor(img.width * ratio);
       img.height = Math.floor(img.height * ratio);
       setImage(img);
-    };
+    }
 
     img.addEventListener("load", handleImage);
 
-    return () => {
+    return function () {
       img.removeEventListener("load", handleImage);
     };
-  };
+  }
 
-  useEffect(loadImage, [props.url, props.width]);
+  useEffect(loadImage, [width]);
 
   if (image) {
     return <Image image={image} />;

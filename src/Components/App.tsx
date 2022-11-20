@@ -1,10 +1,10 @@
 import { Route, Routes } from "react-router-dom";
-import MainPage from "./MainPage";
-import Navbar from "./Navbar";
 
 import Sector01 from "./Macroblocks/Sector01";
 import Sector02 from "./Macroblocks/Sector02";
 import Sector03 from "./Macroblocks/Sector03";
+import MainPage from "./MainPage";
+import Navbar from "./Navbar";
 
 function App() {
   return (

@@ -14,7 +14,7 @@ interface RhomboidProps {
 }
 
 function Rhomboid(props: RhomboidProps) {
-  const angle = props.angle ? props.angle : Math.PI / 3;
+  const angle = props.angle || Math.PI / 3;
 
   const { x, y, height, width } = props;
 

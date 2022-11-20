@@ -10,7 +10,11 @@ interface PillarComponentProps {
   stageHeight: number;
 }
 
-function PillarComponent(props: PillarComponentProps) {
+function PillarComponent({
+  pillar,
+  stageHeight,
+  stageWidth,
+}: PillarComponentProps) {
   const { setSelectedPillar } = useStore(
     (state) => ({
       setSelectedPillar: state.setSelectedPillar,
@@ -18,14 +22,14 @@ function PillarComponent(props: PillarComponentProps) {
     shallow
   );
 
-  const { x, y, height, width, angle, color } = props.pillar.getJsxData();
-  const xPos = x * props.stageWidth;
-  const yPos = y * props.stageHeight;
-  const pillarHeight = height * props.stageHeight;
-  const pillarWidth = width * props.stageWidth;
+  const { x, y, height, width, angle, color } = pillar.getJsxData();
+  const xPos = x * stageWidth;
+  const yPos = y * stageHeight;
+  const pillarHeight = height * stageHeight;
+  const pillarWidth = width * stageWidth;
 
   const clickHandler = () => {
-    setSelectedPillar(props.pillar);
+    setSelectedPillar(pillar);
   };
 
   return (

@@ -1,5 +1,3 @@
-import WaterfallChart from "./WaterfallChart";
-
 export default function MainPage() {
   return (
     <>
@@ -19,10 +17,18 @@ export default function MainPage() {
       <h2 className="display-6">Como utilizar esta herramienta</h2>
       <hr />
       <ol className="lead">
-        <li>En la barra de navegación (zona superior, en móvil es plegable) clickear en el sector de interés.</li>
-        <li>Se observará un mapa de la macrozona, cada color representa una probabilidad de colapso.</li>
-        <li>Para obtener detalle de un pilar en específico, clickear en el pilar del mapa y se mostrará un
-          gráfico con los factores que más influyen en la probabilidad de colapso.
+        <li>
+          En la barra de navegación (zona superior, en móvil es plegable)
+          clickear en el sector de interés.
+        </li>
+        <li>
+          Se observará un mapa de la macrozona, cada color representa una
+          probabilidad de colapso.
+        </li>
+        <li>
+          Para obtener detalle de un pilar en específico, clickear en el pilar
+          del mapa y se mostrará un gráfico con los factores que más influyen en
+          la probabilidad de colapso.
         </li>
       </ol>
     </>

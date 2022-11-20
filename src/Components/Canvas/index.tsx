@@ -14,7 +14,7 @@ const canvasStyle = {
   border: "1px solid black",
 };
 
-function MineCanvas(props: MineCanvasProps) {
+function MineCanvas({ backgroundImage, children }: MineCanvasProps) {
   const { setStageHeight, setStageWidth, stageWidth, stageHeight } = useStore(
     (state) => ({
       stageHeight: state.height,
@@ -32,7 +32,7 @@ function MineCanvas(props: MineCanvasProps) {
       const height = stageWidth * (584 / 1041); // Ratio of the image
       setStageHeight(height);
     }
-  }, [stageWidth, setStageHeight, setStageWidth]);
+  }, [stageWidth]);
 
   useEffect(() => {
     handleResize();
@@ -47,9 +47,9 @@ function MineCanvas(props: MineCanvasProps) {
     <div ref={containerRef}>
       <Stage width={stageWidth} height={stageHeight} style={canvasStyle}>
         <Layer>
-          <BackgroundImage url={props.backgroundImage} width={stageWidth} />
+          <BackgroundImage url={backgroundImage} width={stageWidth} />
         </Layer>
-        <Layer>{props.children}</Layer>
+        <Layer>{children}</Layer>
       </Stage>
     </div>
   );
