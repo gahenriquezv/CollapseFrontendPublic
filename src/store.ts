@@ -28,9 +28,9 @@ interface State {
 const useStore = create<State>((set) => ({
   // Canvas size state
   height: initialHeight,
-  setHeight: (newHeight) => set((state) => ({ ...state, height: newHeight })),
+  setHeight: (newHeight) => set({ height: newHeight }),
   width: initialWidth,
-  setWidth: (newWidth) => set((state) => ({ ...state, width: newWidth })),
+  setWidth: (newWidth) => set({ width: newWidth }),
 
   // Pillars global state
   sector01Pillars,
@@ -39,8 +39,7 @@ const useStore = create<State>((set) => ({
 
   // Selected Pillar
   selectedPillar: null,
-  setSelectedPillar: (newPillar) =>
-    set((state) => ({ ...state, selectedPillar: newPillar })),
+  setSelectedPillar: (newPillar) => set({ selectedPillar: newPillar }),
 }));
 
 export default useStore;
