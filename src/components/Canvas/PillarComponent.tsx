@@ -8,6 +8,15 @@ interface PillarComponentProps {
   stageHeight: number;
 }
 
+/**
+ * Renders a Pillar (as a Rhomboid) given the data of the instance by calling
+ * the Pillar.getJsxData method. Handles position, size, angle and color.
+ * Must be used in a Layer of a React-Konva canvas.
+ * @param {Pillar} props.pillar Pillar object instance
+ * @param {number} props.stageHeight Height of the canvas (px)
+ * @param {number} props.stageWidth Width of the canvas (px)
+ * @returns A rendered pillar.
+ */
 function PillarComponent({
   pillar,
   stageHeight,

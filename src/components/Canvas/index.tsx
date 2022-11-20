@@ -10,10 +10,18 @@ interface MineCanvasProps {
   children: JSX.Element | JSX.Element[];
 }
 
+// CSS
 const canvasStyle = {
   border: "1px solid black",
 };
 
+/**
+ * Renders the base layer of the macroblock. Handles resizing and the background image.
+ * Children must be compatible with React-Konva Layer
+ * @param {string} props.backgroundImage URL to the canvas background image
+ * @param {JSX.Element | JSX.Element[]} props.children Elements to add in a React-Konva canvas layer
+ * @returns The base canvas of the Macroblock.
+ */
 function MineCanvas({ backgroundImage, children }: MineCanvasProps) {
   const { setStageHeight, setStageWidth, stageWidth, stageHeight } = useStore(
     (state) => ({

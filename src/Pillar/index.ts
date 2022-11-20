@@ -9,19 +9,34 @@ type Dimension = { height: number; width: number };
 type Angle = { angle: number };
 type Color = { color: string };
 
-type JsxData = Point & Dimension & Angle & Color;
+type PillarJSXData = Point & Dimension & Angle & Color;
 
+/**
+ * Represents a Pillar object, helps creating the JSX data for rendering the PillarComponent.
+ */
 export default class Pillar {
+  /**
+   *
+   * @param data Data for the Pillar object, satisfies the PillarData interface
+   */
   constructor(public data: PillarData) {}
 
   get id() {
     return this.data.id;
   }
 
+  /**
+   * Generates a key to help rendering the object in the PillarComponent
+   */
   get key() {
     return `${this.data.zone}_${this.id}`;
   }
 
+  /**
+   * Calculates the point in the canvas where the PillarComponent should be rendered.
+   * Uses fixed data.
+   * @returns Point in where the PillarComponent should be rendered
+   */
   private getCoordinates = (): Point => {
     switch (this.data.zone) {
       case "sector01":
@@ -35,6 +50,10 @@ export default class Pillar {
     }
   };
 
+  /**
+   * Calculates the size of the pillar depending on the sector. Uses fixed data.
+   * @returns Dimensions of the PillarComponent depending on the sector of the Pillar
+   */
   private getDimension = (): Dimension => {
     switch (this.data.zone) {
       case "sector01":
@@ -48,6 +67,10 @@ export default class Pillar {
     }
   };
 
+  /**
+   * Calculates the angle of the pillar to help rendering the PillarComponent. Uses fixed data.
+   * @returns Angle (in radians) of the pillar
+   */
   private getAngle = (): Angle => {
     switch (this.data.zone) {
       case "sector01":
@@ -61,6 +84,10 @@ export default class Pillar {
     }
   };
 
+  /**
+   * Calculates a rgb color (in string format) depending of the collapse chance. Uses fixed data.
+   * @returns Color of the collapse chance.
+   */
   private getColor = (): Color => {
     if (this.data.chance < 0.1) return { color: "rgb(99, 190, 123)" };
     if (this.data.chance < 0.2) return { color: "rgb(255, 235, 132)" };
@@ -75,7 +102,12 @@ export default class Pillar {
     throw new Error("Invalid chance");
   };
 
-  public getJsxData = (): JsxData => {
+  /**
+   * Calculates the coordinates, dimension, angle and color to be used in the PillarComponent.
+   * Uses a lot of fixed data.
+   * @returns Object with all the necesary data for the PillarComponent to be rendered.
+   */
+  public getJsxData = (): PillarJSXData => {
     return {
       ...this.getCoordinates(),
       ...this.getDimension(),

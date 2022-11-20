@@ -6,6 +6,12 @@ interface BackgroundImageProps {
   width: number;
 }
 
+/**
+ * ReactKonva Layer. Renders the image (with the correct size) on the canvas.
+ * @param {string} props.url URL of the background image
+ * @param {number} props.width Width of the canvas where the image will be rendered
+ * @returns ReactKonva Image component.
+ */
 export default function BackgroundImage({ url, width }: BackgroundImageProps) {
   const [image, setImage] = useState<HTMLImageElement | null>(null);
 

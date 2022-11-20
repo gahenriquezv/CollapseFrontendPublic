@@ -1,6 +1,11 @@
 import useStore from "../store";
 import WaterfallChart from "./WaterfallChart";
 
+/**
+ * Renders the text with the collapse probability plus a waterfall diagram with the causes, given a selected
+ * pillar from the store.
+ * @returns The details of the selected pillar, null if the is no selected pillar.
+ */
 function PillarDetails() {
   const selectedPillar = useStore((state) => state.selectedPillar);
 

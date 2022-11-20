@@ -6,7 +6,14 @@ interface WaterfallChartProps {
   instance: Pillar;
 }
 
-function prepareData({ data }: Pillar) {
+/**
+ * Extracts and transforms the data from a Pillar object instance. The returned
+ * data can be then used in a WaterfallChart.
+ * @param pillar Pillar instance.
+ * @returns A two dimensional array with the data prepared to be used in the WaterfallChart component
+ */
+function prepareData(pillar: Pillar) {
+  const data = pillar.data;
   return [
     ["Factor", "", "", "", ""],
     ["A", 0, 0, data.A, data.A],
@@ -18,13 +25,18 @@ function prepareData({ data }: Pillar) {
   ];
 }
 
+/**
+ * Renders a Waterfall Chart using the Google Charts API and the data included
+ * in a Pillar object instance.
+ * @param props.instance Pillar instance
+ * @returns A waterfall chart.
+ */
 export default function WaterfallChart({ instance }: WaterfallChartProps) {
-
   const data = prepareData(instance);
 
   const options: ChartWrapperOptions["options"] = {
     legend: "none",
-    bar: { groupWidth: "90%" }, // Remove space between bars.
+    bar: { groupWidth: "90%" },
     candlestick: {
       fallingColor: { strokeWidth: 0, fill: "#0f9d58" }, // red
       risingColor: { strokeWidth: 0, fill: "#a52714" }, // green
@@ -33,7 +45,8 @@ export default function WaterfallChart({ instance }: WaterfallChartProps) {
       title: "Factor contribuyente",
     },
     hAxis: {
-      title: "Efecto en la probabilidad de colapso (verde disminuye, rojo aumenta)",
+      title:
+        "Efecto en la probabilidad de colapso (verde disminuye, rojo aumenta)",
       maxValue: "1",
       minValue: "-1",
     },

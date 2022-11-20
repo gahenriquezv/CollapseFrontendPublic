@@ -1,5 +1,9 @@
 import { Link } from "react-router-dom";
 
+/**
+ * Returns the Navbar component. Includes fixed data (links to other pages using react router)
+ * @returns Navbar component
+ */
 export default function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">

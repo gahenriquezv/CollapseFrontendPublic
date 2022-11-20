@@ -6,6 +6,10 @@ import Sector02 from "../pages/Sector02";
 import Sector03 from "../pages/Sector03";
 import Navbar from "./Navbar";
 
+/**
+ * Main web application component. Includes Navbar and Routing
+ * @returns Base webpage, includes routing.
+ */
 function App() {
   return (
     <>
