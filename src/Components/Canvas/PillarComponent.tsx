@@ -1,28 +1,23 @@
-import { connect, ConnectedProps } from "react-redux";
-import { selectPillarAction } from "../../actions";
+import shallow from "zustand/shallow";
+
 import Pillar from "../../Pillar";
-import { RootState } from "../../reducers";
+import useStore from "../../store";
 import Rhomboid from "./Rhomboid";
 
-const mapState = (state: RootState) => {
-  return {
-    selectedPillar: state.selectedPillar,
-  };
-};
-
-const mapDispatch = {
-  setSelectedPillar: selectPillarAction,
-};
-
-const connector = connect(mapState, mapDispatch);
-
-interface PillarComponentProps extends ConnectedProps<typeof connector> {
+interface PillarComponentProps {
   pillar: Pillar;
   stageWidth: number;
   stageHeight: number;
 }
 
-function PillarComponentBase(props: PillarComponentProps) {
+function PillarComponent(props: PillarComponentProps) {
+  const { setSelectedPillar } = useStore(
+    (state) => ({
+      setSelectedPillar: state.setSelectedPillar,
+    }),
+    shallow
+  );
+
   const { x, y, height, width, angle, color } = props.pillar.getJsxData();
   const xPos = x * props.stageWidth;
   const yPos = y * props.stageHeight;
@@ -30,7 +25,7 @@ function PillarComponentBase(props: PillarComponentProps) {
   const pillarWidth = width * props.stageWidth;
 
   const clickHandler = () => {
-    props.setSelectedPillar(props.pillar);
+    setSelectedPillar(props.pillar);
   };
 
   return (
@@ -46,5 +41,4 @@ function PillarComponentBase(props: PillarComponentProps) {
   );
 }
 
-const PillarComponent = connector(PillarComponentBase);
 export default PillarComponent;

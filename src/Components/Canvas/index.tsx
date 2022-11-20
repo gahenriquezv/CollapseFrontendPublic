@@ -1,37 +1,30 @@
 import { useCallback, useEffect, useRef } from "react";
 import { Layer, Stage } from "react-konva";
-import { connect, ConnectedProps } from "react-redux";
-import { changeHeightAction, changeWidthAction } from "../../actions";
-import { RootState } from "../../reducers";
+import shallow from "zustand/shallow";
+
+import useStore from "../../store";
 import BackgroundImage from "./BackgroundImage";
 
-const mapState = (state: RootState) => {
-  return {
-    stageHeight: state.height,
-    stageWidth: state.width,
-  };
-};
-
-const mapDispatch = {
-  setStageHeight: changeHeightAction,
-  setStageWidth: changeWidthAction,
-};
-
-const connector = connect(mapState, mapDispatch);
-
-interface MineCanvasProps extends ConnectedProps<typeof connector> {
+interface MineCanvasProps {
   backgroundImage: string;
-  children: React.ReactNode;
+  children: JSX.Element | JSX.Element[];
 }
 
 const canvasStyle = {
   border: "1px solid black",
 };
 
-function MineCanvasBase(props: MineCanvasProps) {
+function MineCanvas(props: MineCanvasProps) {
+  const { setStageHeight, setStageWidth, stageWidth, stageHeight } = useStore(
+    (state) => ({
+      stageHeight: state.height,
+      stageWidth: state.width,
+      setStageWidth: state.setWidth,
+      setStageHeight: state.setHeight,
+    }),
+    shallow
+  );
   const containerRef = useRef<HTMLDivElement>(null);
-
-  const { stageWidth, setStageWidth, setStageHeight } = props;
 
   const handleResize = useCallback(() => {
     if (containerRef.current) {
@@ -50,27 +43,16 @@ function MineCanvasBase(props: MineCanvasProps) {
     };
   }, [handleResize]);
 
-  // const dimensions = { stageWidth, stageHeight };
-
   return (
     <div ref={containerRef}>
-      <Stage
-        width={props.stageWidth}
-        height={props.stageHeight}
-        style={canvasStyle}
-      >
+      <Stage width={stageWidth} height={stageHeight} style={canvasStyle}>
         <Layer>
-          <BackgroundImage
-            url={props.backgroundImage}
-            width={props.stageWidth}
-          />
+          <BackgroundImage url={props.backgroundImage} width={stageWidth} />
         </Layer>
         <Layer>{props.children}</Layer>
       </Stage>
     </div>
   );
 }
-
-const MineCanvas = connector(MineCanvasBase);
 
 export default MineCanvas;

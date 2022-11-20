@@ -1,23 +1,14 @@
-import { connect, ConnectedProps } from "react-redux";
-import { RootState } from "../../../reducers";
+import shallow from "zustand/shallow";
+
+import useStore from "../../../store";
 import PillarDetails from "../../PillarDetails";
 import Sector03Canvas from "./canvas";
 
-const mapState = (state: RootState) => {
-  return {
-    pillar: state.selectedPillar,
-  };
-};
-
-const connector = connect(mapState);
-
-function Sector03Base(props: ConnectedProps<typeof connector>) {
-  const checkIfPillar = () => {
-    if (props.pillar) {
-      return <PillarDetails pillar={props.pillar} />;
-    }
-    return null;
-  };
+function Sector03() {
+  const { pillar } = useStore(
+    (state) => ({ pillar: state.selectedPillar }),
+    shallow
+  );
 
   return (
     <>
@@ -25,11 +16,14 @@ function Sector03Base(props: ConnectedProps<typeof connector>) {
       <hr />
       <Sector03Canvas />
       <hr />
-      <ul>{checkIfPillar()} </ul>
+      {(() => {
+        if (pillar) {
+          return <PillarDetails pillar={pillar} />;
+        }
+        return null;
+      })()}
     </>
   );
 }
-
-const Sector03 = connector(Sector03Base);
 
 export default Sector03;

@@ -1,41 +1,33 @@
-import { connect, ConnectedProps, Provider } from "react-redux";
-import { RootState } from "../../../reducers";
-import store from "../../../store";
+import shallow from "zustand/shallow";
+
+import useStore from "../../../store";
 import MineCanvas from "../../Canvas";
 import PillarComponent from "../../Canvas/PillarComponent";
 
-const mapState = (state: RootState) => {
-  return {
-    stageWidth: state.width,
-    stageHeight: state.height,
-    pillars: state.s2s3Pillars,
-  };
-};
-
-const connector = connect(mapState);
-
-type Sector02Props = ConnectedProps<typeof connector>;
-
-function Sector02Base(props: Sector02Props) {
-  function pillars() {
-    return props.pillars.map((pillar) => {
-      return (
-        <PillarComponent
-          stageHeight={props.stageHeight}
-          stageWidth={props.stageWidth}
-          pillar={pillar}
-          key={pillar.key}
-        />
-      );
-    });
-  }
+function Sector02() {
+  const { pillars, stageWidth, stageHeight } = useStore(
+    (state) => ({
+      pillars: state.sector02Pillars,
+      stageWidth: state.width,
+      stageHeight: state.height,
+    }),
+    shallow
+  );
 
   return (
     <MineCanvas backgroundImage={"/macrobloques/sec2.png"}>
-      <Provider store={store}>{pillars()}</Provider>
+      {pillars.map((pillar) => {
+        return (
+          <PillarComponent
+            stageHeight={stageHeight}
+            stageWidth={stageWidth}
+            pillar={pillar}
+            key={pillar.key}
+          />
+        );
+      })}
     </MineCanvas>
   );
 }
 
-const Sector02Canvas = connector(Sector02Base);
-export default Sector02Canvas;
+export default Sector02;

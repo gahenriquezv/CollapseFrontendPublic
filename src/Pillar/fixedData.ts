@@ -1,6 +1,6 @@
 import { PillarData } from "./PillarDataType";
 
-const pillarData = [
+const pillarData: PillarData[] = [
   {
     chance: 0.8866213934182336,
     A: 0.9047490111982682,
@@ -3985,6 +3985,6 @@ const pillarData = [
   },
 ];
 
-export const sector01Data = pillarData.filter((val) => val.zone === "sector01") as PillarData[];
-export const sector02Data = pillarData.filter((val) => val.zone === "sector02") as PillarData[];
-export const sector03Data = pillarData.filter((val) => val.zone === "sector03") as PillarData[];
+export const sector01Data = pillarData.filter((val) => val.zone === "sector01");
+export const sector02Data = pillarData.filter((val) => val.zone === "sector02");
+export const sector03Data = pillarData.filter((val) => val.zone === "sector03");
