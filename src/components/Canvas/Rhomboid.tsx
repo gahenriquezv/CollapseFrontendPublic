@@ -8,8 +8,7 @@ interface RhomboidProps {
   width: number;
   color: string;
   onClick: (evt: KonvaEventObject<MouseEvent>) => void;
-  angle?: number;
-  draggable?: boolean;
+  angle: number;
 }
 
 /**
@@ -20,8 +19,7 @@ interface RhomboidProps {
  * @param {number} props.width width (px) if the rhomboid.
  * @param {string} props.color Color of the rhomboid (fill) in css format.
  * @param {function} props.onClick MouseEvent handler callback that will be called when clicking the rhomboid.
- * @param {number} props.angle Angle of the rhomboid (in radians), defaults to PI/3.
- * @param {boolean} props.draggable: True if the Rhomboid is draggable, false otherwise. Defaults to false.
+ * @param {number} props.angle Angle of the rhomboid (in radians).
  * @returns A React-Konva canvas layer with the shape of a Rhomboid
  */
 function Rhomboid({
@@ -30,12 +28,9 @@ function Rhomboid({
   height,
   width,
   color,
-  draggable,
   onClick,
   angle,
 }: RhomboidProps) {
-  angle = angle || Math.PI / 3;
-
   const points = [
     -height / Math.tan(angle),
     height,
@@ -55,7 +50,6 @@ function Rhomboid({
       closed={true}
       fill={color}
       stroke="black"
-      draggable={draggable}
       onClick={onClick}
       onMouseEnter={(e) => {
         const container = e.target.getStage()?.container();
