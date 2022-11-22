@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import Pillar from "../Pillar";
 import useStore from "../store";
@@ -17,32 +17,6 @@ interface SectorCanvasProps {
 }
 
 /**
- * Renders the full canvas of the Macroblock.
- * @param {string} props.backgroundImage URL to the background image
- * @param {Pillar[]} props.pillars Array of Pillar instances to be rendered.
- * @returns Complete Canvas with every pillar included plus the background image.
- */
-export function SectorCanvas({ backgroundImage, pillars }: SectorCanvasProps) {
-  const stageWidth = useStore((state) => state.width);
-  const stageHeight = useStore((state) => state.height);
-
-  return (
-    <MineCanvas backgroundImage={backgroundImage}>
-      {pillars.map((pillar) => {
-        return (
-          <PillarComponent
-            stageHeight={stageHeight}
-            stageWidth={stageWidth}
-            pillar={pillar}
-            key={pillar.key}
-          />
-        );
-      })}
-    </MineCanvas>
-  );
-}
-
-/**
  * Component for the main Macroblock. Only includes the title and the details (if available).
  * @param {string} props.title Title of the canvas. Will be rendered as a heading element.
  * @param {JSX.Element} props.children A SectorCanvas component with the necesary data included.
@@ -51,8 +25,8 @@ export function SectorCanvas({ backgroundImage, pillars }: SectorCanvasProps) {
 export function Macroblock({ title, children }: MacroblockProps) {
   const setSelectedPillar = useStore((state) => state.setSelectedPillar);
 
-  useEffect(function () {
-    return function () {
+  useEffect(() => {
+    return () => {
       setSelectedPillar(null);
     };
   });
@@ -65,5 +39,37 @@ export function Macroblock({ title, children }: MacroblockProps) {
       <hr />
       <PillarDetails />
     </>
+  );
+}
+
+/**
+ * Renders the full canvas of the Macroblock.
+ * @param {string} props.backgroundImage URL to the background image
+ * @param {Pillar[]} props.pillars Array of Pillar instances to be rendered.
+ * @returns Complete Canvas with every pillar included plus the background image.
+ */
+export function SectorCanvas({ backgroundImage, pillars }: SectorCanvasProps) {
+  const [stageWidth, setStageWidth] = useState(0);
+  const [stageHeight, setStageHeight] = useState(0);
+
+  return (
+    <MineCanvas
+      backgroundImage={backgroundImage}
+      stageWidth={stageWidth}
+      stageHeight={stageHeight}
+      setStageWidth={setStageWidth}
+      setStageHeight={setStageHeight}
+    >
+      {pillars.map((pillar) => {
+        return (
+          <PillarComponent
+            stageHeight={stageHeight}
+            stageWidth={stageWidth}
+            pillar={pillar}
+            key={pillar.key}
+          />
+        );
+      })}
+    </MineCanvas>
   );
 }

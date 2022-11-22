@@ -1,13 +1,15 @@
 import { useCallback, useEffect, useRef } from "react";
 import { Layer, Stage } from "react-konva";
-import shallow from "zustand/shallow";
 
-import useStore from "../../store";
 import BackgroundImage from "./BackgroundImage";
 
 interface MineCanvasProps {
   backgroundImage: string;
   children: JSX.Element | JSX.Element[];
+  stageWidth: number;
+  stageHeight: number;
+  setStageWidth?: (width: number) => void;
+  setStageHeight?: (height: number) => void;
 }
 
 // CSS
@@ -20,22 +22,25 @@ const canvasStyle = {
  * Children must be compatible with React-Konva Layer
  * @param {string} props.backgroundImage URL to the canvas background image
  * @param {JSX.Element | JSX.Element[]} props.children Elements to add in a React-Konva canvas layer
+ * @param {number} props.stageWidth width (px) of the canvas
+ * @param {number} props.stageHeight height (px) of the canvas
+ * @param {(number) => void} props.setStageWidth function to set the width (px) of the stage. Optional.
+ * @param {(number) => void} props.setStageHeight function to set the height (px) of the stage. Optional.
+
  * @returns The base canvas of the Macroblock.
  */
-function MineCanvas({ backgroundImage, children }: MineCanvasProps) {
-  const { setStageHeight, setStageWidth, stageWidth, stageHeight } = useStore(
-    (state) => ({
-      stageHeight: state.height,
-      stageWidth: state.width,
-      setStageWidth: state.setWidth,
-      setStageHeight: state.setHeight,
-    }),
-    shallow
-  );
+function MineCanvas({
+  backgroundImage,
+  children,
+  stageWidth,
+  setStageWidth,
+  stageHeight,
+  setStageHeight,
+}: MineCanvasProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const handleResize = useCallback(() => {
-    if (containerRef.current) {
+    if (containerRef.current && setStageWidth && setStageHeight) {
       setStageWidth(containerRef.current.clientWidth);
       const height = stageWidth * (584 / 1041); // Ratio of the image
       setStageHeight(height);
