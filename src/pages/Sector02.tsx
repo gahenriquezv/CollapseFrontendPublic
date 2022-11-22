@@ -1,8 +1,10 @@
 import { Macroblock, SectorCanvas } from "../components/Macroblock";
-import useStore from "../store";
+import Pillar from "../Pillar";
+import { sector02Data } from "../Pillar/fixed";
+
+const pillars = sector02Data.map((data) => new Pillar(data));
 
 export default function Sector02() {
-  const pillars = useStore((state) => state.sector02Pillars);
   return (
     <Macroblock title="Sector 02">
       <SectorCanvas
