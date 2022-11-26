@@ -26,14 +26,6 @@ en ninguno de los commits.
 
 Para un listado completo, leer el archivo ``package.json``
 
-## Trabajo futuro propuesto
-
-**TODO: Escribir esto.**
-
-# Agradecimientos
-
-- TBD
-
 # Licencia
 
 Todo el código está bajo licencia MIT. Para más información leer [este archivo.](https://github.com/gahenriquezv/CollapseFrontendPublic/blob/main/LICENSE)
